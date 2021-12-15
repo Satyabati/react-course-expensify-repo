@@ -12,17 +12,17 @@ import getVisibleExpenses from './selectors/expenses'
 
 const store = configureStore();
 console.log(store.getState());
-const expenseOne = store.dispatch(addExpense({description:'Water Bill',amount:10000}))
-const expenseTwo = store.dispatch(addExpense({description:'Gass Bill',amount:3000,createdAt:1000}))
-const expenseThree = store.dispatch(addExpense({description:'Rent',amount:10950,createdAt:-21000}))
-store.dispatch(setTextFilter("water"));
-setTimeout(() =>{
-    store.dispatch(setTextFilter('bill'))
-},6000)
-console.log(store.getState());
-const state = store.getState();
-const visibleExpenses = getVisibleExpenses(state.expenses,state.filters);
-console.log(visibleExpenses)
+// const expenseOne = store.dispatch(addExpense({description:'Water Bill',amount:10000}))
+// const expenseTwo = store.dispatch(addExpense({description:'Gass Bill',amount:3000,createdAt:1000}))
+// const expenseThree = store.dispatch(addExpense({description:'Rent',amount:10950,createdAt:-21000}))
+// store.dispatch(setTextFilter("water"));
+// setTimeout(() =>{
+//     store.dispatch(setTextFilter('bill'))
+// },6000)
+// console.log(store.getState());
+// const state = store.getState();
+// const visibleExpenses = getVisibleExpenses(state.expenses,state.filters);
+// console.log(visibleExpenses)
 // store.subscribe(()=>{
 //     console.log('inside')
    
