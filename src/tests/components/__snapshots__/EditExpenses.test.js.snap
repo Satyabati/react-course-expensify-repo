@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should handle edit Expense and remove expense 1`] = `
+<div>
+  editing the expense for item with id of 
+  2
+  <ExpenseForm
+    expense={
+      Object {
+        "amount": 54600,
+        "createdAt": -345600000,
+        "description": "February Rent",
+        "id": "2",
+        "notes": "This was the final payment for the address",
+      }
+    }
+    onSubmit={[Function]}
+  />
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+</div>
+`;
+
+exports[`should render editExpense correctly 1`] = `
+<div>
+  editing the expense for item with id of 
+  2
+  <ExpenseForm
+    expense={
+      Object {
+        "amount": 54600,
+        "createdAt": -345600000,
+        "description": "February Rent",
+        "id": "2",
+        "notes": "This was the final payment for the address",
+      }
+    }
+    onSubmit={[Function]}
+  />
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+</div>
+`;
