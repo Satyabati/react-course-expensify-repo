@@ -6,9 +6,9 @@ exports[`should render ExpenseListItem with expenses 1`] = `
     Gum
   </h3>
   <p>
-    54500
-     -
-    0
+    $54,500.00
+    -
+    January 1st,1970
   </p>
   <NavLink
     activeClassName="active"
