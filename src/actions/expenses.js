@@ -47,9 +47,38 @@ const editExpenses=(id,updates) => (
     }
 )
 
+//SET_EXPENSES
+const setExpenses = (expenses) =>({
+ type:'SET_EXPENSES',
+ expenses
+
+})
+
+const startSetExpenses = () =>{
+    
+    return (dispatch) =>{
+        let expenses = [];
+        return database.ref('expenses')
+     .once('value').then((snapshot) =>{
+      snapshot.forEach((childDataSnapShot) =>{
+        expenses.push({
+          id:childDataSnapShot.key,
+           ...childDataSnapShot.val()
+         });
+       });
+     }).catch((e)=>{
+       console.log('Error with data fetching', e)
+      }).then(() =>{
+          dispatch(setExpenses(expenses))
+      });
+    }
+}
+
 module.exports = {
     addExpense,
     removeExpenses,
     editExpenses,
-    startAddExpenses
+    startAddExpenses,
+    setExpenses,
+    startSetExpenses
 }
