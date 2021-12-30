@@ -1,4 +1,4 @@
-import {addExpense,removeExpenses,editExpenses, startAddExpenses, setExpenses,startSetExpenses, startRemoveExpenses} from '../../actions/expenses';
+import {addExpense,removeExpenses,editExpenses, startAddExpenses, setExpenses,startSetExpenses, startRemoveExpenses, startEditExpenses} from '../../actions/expenses';
 import expenses from '../fixtures/expenses'
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -31,6 +31,9 @@ test('should remove expenses from firebase', (done) =>{
             type:'REMOVE_EXPENSE',
             id:expenses[0].id
         });
+        return database.ref(`expenses/${expenses[0].id}`).once('value'); 
+    }).then((snapshot) =>{
+        expect(snapshot.val()).toBeFalsy();
         done();
     })
 
@@ -56,6 +59,50 @@ test('Should setup edit expense action object', ()=>{
     })
 });
 
+test('Should setup edit expense action object', ()=>{
+    const update = {
+        description:'January Rent',
+        notes:'This was the final payment for the address',
+        amount:54500,
+        createdAt:0
+    };
+    const action = editExpenses('123abc',update);
+    expect(action).toEqual({
+        type:'EDIT_EXPENSE',
+        id:'123abc',
+        updates:{
+            description:'January Rent',
+            notes:'This was the final payment for the address',
+            amount:54500,
+            createdAt:0
+        }
+    })
+});
+
+test('Should edit expense from database and store', (done)=>{
+    
+    const store = createMockStore({});
+    const expenseData = {
+        description:'Mouse2',
+        amount:100,
+        notes:'dummy 2',
+        createdAt:1000
+    };
+    store.dispatch(startEditExpenses(expenses[0].id,expenseData)).then(() =>{
+        const actions = store.getActions();
+        
+        expect(actions[0]).toEqual({
+            type:'EDIT_EXPENSE',
+            id:expenses[0].id,
+            updates:expenseData
+        });
+        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+    }).then((snapshot)=>{
+        expect(snapshot.val()).toEqual(expenseData);
+        done();
+    })
+   done();
+});
 test('Should setup add expense action object with provided value', ()=>{
     
     const action = addExpense(expenses[2]);
